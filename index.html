@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Girl ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#120018;
+    color:white;
+    overflow:hidden;
+}
+
+/* SCREEN */
+
+.screen{
+    display:none;
+    width:100vw;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.screen.active{
+    display:flex;
+}
+
+/* BACKGROUND */
+
+.bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+    filter:brightness(45%);
+    transform:scale(1.05);
+}
+
+/* DARK OVERLAY */
+
+.screen::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            rgba(20,0,30,0.35),
+            rgba(10,0,20,0.78)
+        );
+    z-index:1;
+}
+
+/* CONTENT */
+
+.content{
+    position:relative;
+    z-index:2;
+    width:90%;
+    max-width:800px;
+    padding:30px;
+}
+
+/* GLASS CARD */
+
+.card{
+    background:rgba(255,255,255,0.10);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,0.20);
+
+    border-radius:25px;
+
+    padding:35px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.35);
+}
+
+/* TEXT */
+
+h1{
+    font-size:48px;
+    margin-bottom:15px;
+}
+
+h2{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+h3{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+p{
+    font-size:18px;
+    line-height:1.7;
+}
+
+/* BIG EMOJI */
+
+.big-emoji{
+    font-size:65px;
+    margin-bottom:15px;
+}
+
+/* MY GIRL */
+
+.myGirl{
+    font-size:60px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+/* BUTTON */
+
+button{
+    border:none;
+    padding:15px 28px;
+    border-radius:30px;
+
+    background:linear-gradient(
+        135deg,
+        #ff4f91,
+        #ff78ad
+    );
+
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    margin-top:25px;
+
+    box-shadow:
+        0 8px 20px rgba(255,50,130,0.35);
+
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.07);
+}
+
+button.secondary{
+    background:rgba(255,255,255,0.18);
+    margin-left:10px;
+}
+
+/* NORMAL PHOTO */
+
+.photo{
+    width:220px;
+    height:220px;
+
+    object-fit:cover;
+
+    border-radius:20px;
+
+    margin:20px auto;
+
+    display:block;
+
+    border:3px solid rgba(255,255,255,0.7);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* CIRCLE PHOTO */
+
+.circle-photo{
+    width:190px;
+    height:190px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    margin:20px auto;
+
+    display:block;
+
+    border:4px solid white;
+
+    box-shadow:
+        0 10px 35px rgba(255,70,140,0.35);
+}
+
+/* MOM MEMORY */
+
+.memoryImg{
+    width:280px;
+    max-width:100%;
+
+    max-height:330px;
+
+    object-fit:cover;
+
+    border-radius:22px;
+
+    margin:20px auto;
+
+    display:block;
+
+    border:3px solid rgba(255,255,255,0.7);
+
+    box-shadow:
+        0 12px 40px rgba(0,0,0,0.5);
+}
+
+/* TIMELINE */
+
+.timeline{
+    text-align:left;
+    margin-top:20px;
+}
+
+.timeline-item{
+    background:rgba(255,255,255,0.10);
+
+    padding:18px;
+
+    border-radius:18px;
+
+    margin:12px 0;
+
+    border-left:4px solid #ff72a8;
+}
+
+.timeline-item strong{
+    font-size:20px;
+}
+
+/* LETTER */
+
+.letter{
+    text-align:left;
+
+    background:rgba(255,255,255,0.08);
+
+    padding:25px;
+
+    border-radius:20px;
+
+    max-height:55vh;
+
+    overflow-y:auto;
+}
+
+.letter p{
+    margin-bottom:15px;
+}
+
+/* PROPOSAL */
+
+.proposal h1{
+    font-size:52px;
+}
+
+.proposal-photo{
+    width:180px;
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:50%;
+
+    border:4px solid white;
+
+    margin:20px auto;
+}
+
+/* HEART */
+
+.heart{
+    font-size:75px;
+
+    animation:
+        heartbeat 1.2s infinite;
+}
+
+@keyframes heartbeat{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.18);
+    }
+
+}
+
+/* FLOATING HEARTS */
+
+.floating-heart{
+    position:fixed;
+
+    bottom:-30px;
+
+    font-size:25px;
+
+    animation:
+        floatUp 5s linear forwards;
+
+    z-index:10;
+
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+
+}
+
+/* GALLERY */
+
+.gallery{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+    margin-top:20px;
+}
+
+.gallery img{
+    width:100%;
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+    border:2px solid rgba(255,255,255,0.5);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .content{
+        width:94%;
+        padding:15px;
+    }
+
+    .card{
+        padding:25px 18px;
+    }
+
+    h1{
+        font-size:35px;
+    }
+
+    h2{
+        font-size:27px;
+    }
+
+    h3{
+        font-size:21px;
+    }
+
+    p{
+        font-size:16px;
+    }
+
+    .myGirl{
+        font-size:45px;
+    }
+
+    .big-emoji{
+        font-size:50px;
+    }
+
+    .photo{
+        width:170px;
+        height:170px;
+    }
+
+    .circle-photo{
+        width:150px;
+        height:150px;
+    }
+
+    .memoryImg{
+        width:230px;
+        max-height:260px;
+    }
+
+    .proposal h1{
+        font-size:38px;
+    }
+
+    .proposal-photo{
+        width:150px;
+        height:150px;
+    }
+
+    button{
+        font-size:15px;
+        padding:13px 22px;
+    }
+
+    button.secondary{
+        margin-left:0;
+        margin-top:10px;
+    }
+
+    .gallery img{
+        height:90px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ========================= -->
+<!-- 1. OPENING -->
+<!-- ========================= -->
+
+<section class="screen active" id="screen1">
+
+    <img src="jess.jpeg" class="bg">
+
+    <div class="content">
+
+        <div class="card">
+
+            <div class="big-emoji">
+                💝
+            </div>
+
+            <div class="myGirl">
+                My Girl ❤️
+            </div>
+
+            <p>
+                A little surprise made especially for you...
+            </p>
+
+            <p>
+                Because today is not just another day.
+                ✨
+            </p>
+
+            <button onclick="nextScreen(2)">
+                Open My Surprise 💝
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- 2. BIRTHDAY -->
+<!-- ========================= -->
+
+<section class="screen" id="screen2">
+
+    <img src="jess2.jpeg" class="bg">
+
+    <div class="content">
+
+        <div class="card">
+
+            <div class="big-emoji">
+                🎂✨
+            </div>
+
+            <h1>
+                Happy Birthday,
+                My Girl ❤️
+            </h1>
+
+            <img
+                src="jess3.jpeg"
+                class="circle-photo"
+            >
+
+            <h3>
+                10 September 🌷
+            </h3>
+
+            <p>
+                Today is your special day,
+                and I hope it brings you
+                countless smiles, happiness
+                and beautiful memories.
+            </p>
+
+            <button onclick="nextScreen(3)">
+                Continue ❤️
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- 3. MOM MEMORY -->
+<!-- ========================= -->
+
+<section class="screen" id="screen3">
+
+    <img src="jess4.jpeg" class="bg">
+
+    <div class="content">
+
+        <div class="card">
+
+            <div class="big-emoji">
+                🌷
+            </div>
+
+            <h2>
+                A Special Memory
+            </h2>
+
+            <img
+                src="Screenshot 2026-09-07 020106.png"
+                class="memoryImg"
+            >
+
+            <p>
+                Some memories are too precious
+                to ever fade away.
+            </p>
+
+            <p>
+                This is a small place in this
+                surprise to remember someone
+                who will always have a special
+                place in your heart. ❤️
+            </p>
+
+            <button onclick="nextScreen(4)">
+                Continue 🌷
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- 4. BEGINNING -->
+<!-- ========================= -->
+
+<section class="screen" id="screen4">
+
+    <img src="jess5.jpeg" class="bg">
+
+    <div class="content">
+
+        <div class="card">
+
+            <h2>
+                🌱 The Beginning
+            </h2>
+
+            <img
+                src="jess6.jpeg"
+                class="photo"
+            >
+
+            <p>
+                Sometimes someone slowly becomes
+                special without us even realizing it.
+            </p>
+
+            <p>
+                Maybe it starts with a small
+                conversation, a smile,
+                or just a simple moment.
+            </p>
+
+            <button onclick="nextScreen(5)">
+                Next 💭
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- 5. LITTLE MOMENTS -->
+<!-- ========================= -->
+
+<section class="screen" id="screen5">
+
+    <img src="jess7.jpeg" class="bg">
+
+    <div class="content">
+
+        <div class="card">
+
+            <h2>
+                💭 The Little Moments
+            </h2>
+
+            <img
+                src="jess8.jpeg"
+                class="photo"
+            >
+
+            <p>
+                It's funny how little moments
+                can become some of our favorite
+                memories.
+            </p>
+
+            <p>
+                The conversations,
+                the smiles,
+                the random moments...
+                they all become special.
+            </p>
+
+            <button onclick="nextScreen(6)">
+                Keep Going ❤️
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- 6. TIMELINE -->
+<!-- ========================= -->
+
+<section class="screen" id="screen6">
+
+    <img src="jess9.jpeg" class="bg">
+
+    <div class="content">
+
+        <div class="card">
+
+            <h2>
+                🌸 Our Little Timeline
+            </h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <strong>
+                        🌱 The Beginning
+                    </strong>
+
+                    <p>
+                        Someone slowly became
+                        someone special.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <strong>
+                        💭 The Little Moments
+                    </strong>
+
+                    <p>
+                        Small conversations,
+                        smiles and memories.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <strong>
+                        ❤️ Today
+                    </strong>
+
+                    <p>
+                        10 September —
+                        your special day.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <strong>
+                        🌹 One Question
+                    </strong>
+
+                    <p>
+                        There is something
+                        I really want to ask you.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button onclick="nextScreen(7)">
+                One Last Thing 💌
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- 7. LETTER -->
+<!-- ========================= -->
+
+<section class="screen" id="screen7">
+
+    <img src="jess10.jpeg" class="bg">
+
+    <div class="content">
+
+        <div class="card">
+
+            <h2>
+                💌 A Letter For You
+            </h2>
+
+            <div class="letter">
+
+                <p>
+                    Dear My Girl ❤️,
+                </p>
+
+                <p>
+                    Aaj tumhara birthday hai,
+                    aur main chahta hoon ki tumhara
+                    ye din tumhare liye bahut special ho.
+                </p>
+
+                <p>
+                    Shayad main har baar apni feelings
+                    perfectly words mein express nahi
+                    kar pata, lekin tum mere liye
+                    genuinely bahut special ho.
+                </p>
+
+                <p>
+                    Tumhari smile, tumhari baatein
+                    aur tumhara simple sa hona —
+                    ye sab mujhe bahut achha lagta hai.
+                </p>
+
+                <p>
+                    Life mein kuch log aise milte hain
+                    jinke saath baat karna bhi ek
+                    beautiful memory ban jaata hai.
+                    Mere liye tum unhi special people
+                    mein se ek ho. ❤️
+                </p>
+
+                <p>
+                    Main tumhari life mein hamesha
+                    happiness, peace aur success
+                    dekhna chahta hoon.
+                </p>
+
+                <p>
+                    Tumhare saare dreams poore ho,
+                    aur tumhare face par ye smile
+                    hamesha bani rahe. ✨
+                </p>
+
+                <p>
+                    Aur aaj, tumhare birthday par,
+                    main apne dil ki ek baat
+                    kehna chahta hoon...
+                </p>
+
+                <p>
+                    I really like you, and I would
+                    love to have you in my life. ❤️
+                </p>
+
+                <p>
+                    Whatever your answer is,
+                    I'll always respect your feelings.
+                </p>
+
+                <p>
+                    Happy Birthday, My Girl. 🎂❤️
+                </p>
+
+                <p>
+                    — Someone who cares about you 🌷
+                </p>
+
+            </div>
+
+            <button onclick="nextScreen(8)">
+                There's One Question ❤️
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- 8. PROPOSAL -->
+<!-- ========================= -->
+
+<section class="screen" id="screen8">
+
+    <img src="jess11.jpeg" class="bg">
+
+    <div class="content">
+
+        <div class="card proposal">
+
+            <div class="heart">
+                ❤️
+            </div>
+
+            <h1>
+                One Question...
+            </h1>
+
+            <img
+                src="jess11.jpeg"
+                class="proposal-photo"
+            >
+
+            <h2>
+                Will you be mine? ❤️
+            </h2>
+
+            <p>
+                No pressure.
+                Just an honest question
+                from my heart.
+            </p>
+
+            <button onclick="sayYes()">
+                Yes ❤️
+            </button>
+
+            <button
+                class="secondary"
+                onclick="sayTime()"
+            >
+                I need time 🌷
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- 9. FINAL -->
+<!-- ========================= -->
+
+<section class="screen" id="screen9">
+
+    <img src="jess.jpeg" class="bg">
+
+    <div class="content">
+
+        <div class="card">
+
+            <div class="big-emoji">
+                🎉❤️
+            </div>
+
+            <h1>
+                Thank You
+            </h1>
+
+            <p id="finalMessage">
+                Whatever happens,
+                I hope this little surprise
+                made you smile today. 🌷
+            </p>
+
+            <div class="gallery">
+
+                <img src="jess2.jpeg">
+
+                <img src="jess4.jpeg">
+
+                <img src="jess5.jpeg">
+
+                <img src="jess6.jpeg">
+
+                <img src="jess8.jpeg">
+
+                <img src="jess10.jpeg">
+
+            </div>
+
+            <h3 style="margin-top:25px;">
+                Happy Birthday, My Girl 🎂❤️
+            </h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<script>
+
+/* ========================= */
+/* SCREEN CHANGE */
+/* ========================= */
+
+function nextScreen(number){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen => {
+
+            screen.classList.remove("active");
+
+        });
+
+
+    const next =
+        document.getElementById(
+            "screen" + number
+        );
+
+
+    if(next){
+
+        next.classList.add("active");
+
+    }
+
+
+    createHearts(8);
+
+}
+
+
+
+/* ========================= */
+/* YES BUTTON */
+/* ========================= */
+
+function sayYes(){
+
+    document.getElementById(
+        "finalMessage"
+    ).innerHTML =
+        "You just made this moment really special. ❤️✨";
+
+
+    createHearts(30);
+
+    nextScreen(9);
+
+}
+
+
+
+/* ========================= */
+/* NEED TIME BUTTON */
+/* ========================= */
+
+function sayTime(){
+
+    document.getElementById(
+        "finalMessage"
+    ).innerHTML =
+        "Take all the time you need. 🌷 Your feelings and your answer will always be respected. ❤️";
+
+
+    createHearts(10);
+
+    nextScreen(9);
+
+}
+
+
+
+/* ========================= */
+/* CREATE ONE HEART */
+/* ========================= */
+
+function createHeart(){
+
+    const heart =
+        document.createElement("div");
+
+    heart.className =
+        "floating-heart";
+
+    heart.innerHTML =
+        ["❤️","💗","💕","💖","🌷","✨"]
+        [
+            Math.floor(
+                Math.random()*6
+            )
+        ];
+
+
+    heart.style.left =
+        Math.random()*100 + "vw";
+
+
+    heart.style.fontSize =
+        (18 + Math.random()*25) + "px";
+
+
+    heart.style.animationDuration =
+        (3 + Math.random()*4) + "s";
+
+
+    document.body.appendChild(heart);
+
+
+    setTimeout(() => {
+
+        heart.remove();
+
+    },7000);
+
+}
+
+
+
+/* ========================= */
+/* CREATE MULTIPLE HEARTS */
+/* ========================= */
+
+function createHearts(amount){
+
+    for(
+        let i = 0;
+        i < amount;
+        i++
+    ){
+
+        setTimeout(
+            createHeart,
+            i * 80
+        );
+
+    }
+
+}
+
+
+/* START SMALL ANIMATION */
+
+setInterval(
+    createHeart,
+    2500
+);
+
+</script>
+
+</body>
+</html>
