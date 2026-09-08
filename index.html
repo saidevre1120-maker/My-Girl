@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Girl ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Georgia,serif;
+    background:#100817;
+    color:white;
+    overflow:hidden;
+}
+
+.screen{
+    display:none;
+    width:100vw;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+}
+
+.screen.active{
+    display:flex;
+}
+
+.bg{
+    position:absolute;
+    inset:-20px;
+    width:calc(100% + 40px);
+    height:calc(100% + 40px);
+    object-fit:cover;
+    filter:blur(3px);
+    opacity:.30;
+    animation:zoom 12s ease-in-out infinite alternate;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        135deg,
+        rgba(15,4,25,.93),
+        rgba(90,15,75,.72),
+        rgba(10,4,20,.94)
+    );
+}
+
+.content{
+    position:relative;
+    z-index:3;
+    width:90%;
+    max-width:850px;
+    margin:auto;
+    text-align:center;
+    animation:appear 1s ease;
+}
+
+h1{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+h2{
+    font-size:36px;
+    margin-bottom:18px;
+}
+
+p{
+    font-size:19px;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+.small{
+    font-size:16px;
+    opacity:.8;
+}
+
+button{
+    border:0;
+    padding:15px 30px;
+    margin:8px;
+    border-radius:30px;
+    font-size:17px;
+    color:white;
+    background:linear-gradient(135deg,#ff4f9a,#a52cff);
+    cursor:pointer;
+    box-shadow:0 10px 35px rgba(255,50,150,.35);
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-4px) scale(1.04);
+}
+
+.secondary{
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.3);
+}
+
+.myGirl{
+    font-size:72px;
+    color:#ffb8dc;
+    text-shadow:
+        0 0 20px #ff4f9a,
+        0 0 50px rgba(255,70,180,.6);
+}
+
+.emoji{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.card{
+    padding:35px;
+    border-radius:30px;
+    background:rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(15px);
+    box-shadow:0 20px 70px rgba(0,0,0,.35);
+}
+
+.photo{
+    width:min(330px,80vw);
+    height:420px;
+    object-fit:cover;
+    border-radius:28px;
+    border:2px solid rgba(255,255,255,.35);
+    box-shadow:0 20px 70px rgba(255,50,160,.35);
+    animation:photoFloat 5s ease-in-out infinite alternate;
+    margin:15px auto 25px;
+}
+
+.birthday-photo{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:50%;
+    border:4px solid rgba(255,255,255,.5);
+    box-shadow:0 0 45px rgba(255,70,180,.5);
+    margin-bottom:20px;
+    animation:float 4s ease-in-out infinite;
+}
+
+.memory{
+    display:flex;
+    gap:35px;
+    align-items:center;
+    padding:30px;
+    border-radius:30px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.2);
+    text-align:left;
+}
+
+.memory img{
+    width:270px;
+    height:350px;
+    object-fit:cover;
+    border-radius:25px;
+    box-shadow:0 15px 50px rgba(0,0,0,.5);
+}
+
+.timeline{
+    max-width:650px;
+    margin:auto;
+    text-align:left;
+}
+
+.item{
+    padding:18px 25px;
+    margin:14px 0;
+    border-left:3px solid #ff62ac;
+    border-radius:0 18px 18px 0;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(8px);
+    transition:.3s;
+}
+
+.item:hover{
+    transform:translateX(8px);
+}
+
+.item h3{
+    color:#ffb2d7;
+    margin-bottom:5px;
+}
+
+.letter{
+    max-height:65vh;
+    overflow-y:auto;
+    text-align:left;
+    padding:35px;
+    border-radius:28px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.2);
+    backdrop-filter:blur(15px);
+}
+
+.letter p{
+    font-size:18px;
+}
+
+.proposal{
+    padding:45px 25px;
+    border-radius:35px;
+    background:rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.25);
+    backdrop-filter:blur(16px);
+}
+
+.proposal-photo{
+    width:220px;
+    height:220px;
+    object-fit:cover;
+    border-radius:50%;
+    border:4px solid rgba(255,255,255,.45);
+    margin-bottom:20px;
+    box-shadow:0 0 50px rgba(255,60,170,.45);
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    max-height:55vh;
+    overflow:hidden;
+}
+
+.gallery img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:18px;
+    transition:.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+.heart{
+    position:fixed;
+    bottom:-30px;
+    font-size:25px;
+    pointer-events:none;
+    z-index:20;
+    animation:heartUp 4s linear forwards;
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes zoom{
+    from{
+        transform:scale(1);
+    }
+    to{
+        transform:scale(1.08);
+    }
+}
+
+@keyframes photoFloat{
+    from{
+        transform:translateY(0) rotate(-2deg);
+    }
+    to{
+        transform:translateY(-10px) rotate(2deg);
+    }
+}
+
+@keyframes float{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-12px);
+    }
+}
+
+@keyframes heartUp{
+    from{
+        transform:translateY(0) rotate(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+@media(max-width:700px){
+
+    h1{
+        font-size:38px;
+    }
+
+    h2{
+        font-size:28px;
+    }
+
+    p{
+        font-size:17px;
+    }
+
+    .myGirl{
+        font-size:48px;
+    }
+
+    .memory{
+        flex-direction:column;
+        text-align:center;
+        padding:20px;
+    }
+
+    .memory img{
+        width:210px;
+        height:270px;
+    }
+
+    .photo{
+        width:240px;
+        height:300px;
+    }
+
+    .letter{
+        padding:22px;
+        max-height:60vh;
+    }
+
+    .letter p{
+        font-size:16px;
+    }
+
+    .gallery img{
+        height:100px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 1 OPENING -->
+<section class="screen active" id="screen1">
+
+<img src="Jess.jpeg" class="bg">
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="emoji">💝</div>
+
+<div class="myGirl">
+My Girl ❤️
+</div>
+
+<p>
+A little surprise<br>
+made just for you...
+</p>
+
+<button onclick="nextScreen(2)">
+Open My Surprise 💝
+</button>
+
+</div>
+</section>
+
+
+<!-- 2 BIRTHDAY -->
+<section class="screen" id="screen2">
+
+<img src="Jess2.jpeg" class="bg">
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="card">
+
+<img src="Jess3.jpeg" class="birthday-photo">
+
+<div class="emoji">🎂✨</div>
+
+<h1>
+Happy Birthday,<br>
+My Girl ❤️
+</h1>
+
+<p>
+10 September 🌷
+</p>
+
+<p>
+Today is your special day,
+and I just want to remind you
+how genuinely special you are.
+</p>
+
+<p class="small">
+May your life always be filled with
+happiness, peace, beautiful moments
+and lots of smiles. ✨
+</p>
+
+<button onclick="nextScreen(3)">
+Continue 🌷
+</button>
+
+</div>
+</div>
+</section>
+
+
+<!-- 3 MOM MEMORY -->
+<section class="screen" id="screen3">
+
+<img src="Jess4.jpeg" class="bg">
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="memory">
+
+<img src="Screenshot 2026-09-07 020106.png">
+
+<div>
+
+<div class="emoji">🌷</div>
+
+<h2>
+A Beautiful Memory
+</h2>
+
+<p>
+Some memories are precious because
+they remind us of the people and
+moments that will always matter.
+</p>
+
+<p class="small">
+A little space to remember someone
+special with love and respect. 🤍
+</p>
+
+<button onclick="nextScreen(4)">
+Continue ❤️
+</button>
+
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- 4 BEGINNING -->
+<section class="screen" id="screen4">
+
+<img src="Jess5.jpeg" class="bg">
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="emoji">🌱</div>
+
+<h2>
+The Beginning
+</h2>
+
+<img src="Jess6.jpeg" class="photo">
+
+<p>
+Somewhere along the way,
+someone slowly became special.
+</p>
+
+<button onclick="nextScreen(5)">
+Next 💭
+</button>
+
+</div>
+</section>
+
+
+<!-- 5 LITTLE MOMENTS -->
+<section class="screen" id="screen5">
+
+<img src="Jess7.jpeg" class="bg">
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="emoji">💭</div>
+
+<h2>
+The Little Moments
+</h2>
+
+<img src="Jess8.jpeg" class="photo">
+
+<p>
+Small conversations, smiles,
+and simple moments can become
+beautiful memories.
+</p>
+
+<button onclick="nextScreen(6)">
+Next ❤️
+</button>
+
+</div>
+</section>
+
+
+<!-- 6 TIMELINE -->
+<section class="screen" id="screen6">
+
+<img src="Jess9.jpeg" class="bg">
+<div class="overlay"></div>
+
+<div class="content">
+
+<h2>
+Our Little Timeline 🌸
+</h2>
+
+<div class="timeline">
+
+<div class="item">
+<h3>🌱 The Beginning</h3>
+<p class="small">
+Someone slowly became special.
+</p>
+</div>
+
+<div class="item">
+<h3>💭 The Little Moments</h3>
+<p class="small">
+Simple moments became memories.
+</p>
+</div>
+
+<div class="item">
+<h3>❤️ Today</h3>
+<p class="small">
+10 September — your special day.
+</p>
+</div>
+
+<div class="item">
+<h3>🌹 One Question</h3>
+<p class="small">
+Something I've been wanting to ask.
+</p>
+</div>
+
+</div>
+
+<button onclick="nextScreen(7)">
+Next 💌
+</button>
+
+</div>
+</section>
+
+
+<!-- 7 LETTER -->
+<section class="screen" id="screen7">
+
+<img src="Jess10.jpeg" class="bg">
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="letter">
+
+<h2 style="text-align:center;">
+A Letter For You 💌
+</h2>
+
+<p>
+Dear My Girl ❤️,
+</p>
+
+<p>
+Aaj tumhara birthday hai, aur main chahta hoon
+ki tumhara ye din tumhare liye bahut special ho.
+</p>
+
+<p>
+Shayad main har baar apni feelings perfectly
+words mein express nahi kar pata, lekin tum mere
+liye genuinely bahut special ho.
+</p>
+
+<p>
+Tumhari smile, tumhari baatein aur tumhara
+simple sa hona — ye sab mujhe bahut achha lagta hai.
+</p>
+
+<p>
+Life mein kuch log aise milte hain jinke saath
+baat karna bhi ek beautiful memory ban jaata hai.
+Mere liye tum unhi special people mein se ek ho. ❤️
+</p>
+
+<p>
+Main tumhari life mein hamesha happiness,
+peace aur success dekhna chahta hoon.
+Tumhare saare dreams poore ho,
+aur tumhare face par ye smile hamesha bani rahe. ✨
+</p>
+
+<p>
+Aur aaj, tumhare birthday par,
+main apne dil ki ek baat kehna chahta hoon...
+</p>
+
+<p>
+I really like you, and I would love to
+have you in my life. ❤️
+</p>
+
+<p>
+Whatever your answer is,
+I'll always respect your feelings.
+</p>
+
+<p>
+Happy Birthday, My Girl. 🎂❤️
+</p>
+
+<p style="text-align:right;">
+— Someone who cares about you 🌷
+</p>
+
+</div>
+
+<button onclick="nextScreen(8)">
+One Last Thing ❤️
+</button>
+
+</div>
+</section>
+
+
+<!-- 8 PROPOSAL -->
+<section class="screen" id="screen8">
+
+<img src="Jess11.jpeg" class="bg">
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="proposal">
+
+<img src="Jess11.jpeg" class="proposal-photo">
+
+<div class="emoji">🌹</div>
+
+<h1>
+Will You Be Mine? ❤️
+</h1>
+
+<p>
+I don't want to pressure you.
+I just wanted to honestly tell you
+how I feel.
+</p>
+
+<button onclick="sayYes();createHearts(30);nextScreen(9)">
+Yes ❤️
+</button>
+
+<button
+class="secondary"
+onclick="sayTime();nextScreen(9)"
+>
+I need time 🌷
+</button>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- 9 FINAL -->
+<section class="screen" id="screen9">
+
+<img src="Jess.jpeg" class="bg">
+<div class="overlay"></div>
+
+<div class="content">
+
+<div class="emoji">
+✨❤️✨
+</div>
+
+<h1>
+Thank You ❤️
+</h1>
+
+<p>
+Whatever you chose,
+thank you for reading
+this little surprise.
+</p>
+
+<p>
+You deserve beautiful things,
+beautiful memories,
+and lots of happiness. 🌷
+</p>
+
+<div class="gallery">
+
+<img src="Jess2.jpeg">
+<img src="Jess4.jpeg">
+<img src="Jess5.jpeg">
+
+<img src="Jess6.jpeg">
+<img src="Jess8.jpeg">
+<img src="Jess10.jpeg">
+
+</div>
+
+<div class="emoji">
+🎂🌹❤️✨
+</div>
+
+</div>
+</section>
+
+
+<script>
+
+function nextScreen(number){
+
+    document.querySelectorAll(".screen").forEach(function(screen){
+        screen.classList.remove("active");
+    });
+
+    document.getElementById("screen"+number).classList.add("active");
+}
+
+function sayYes(){
+    console.log("She chose YES ❤️");
+}
+
+function sayTime(){
+    console.log("She needs some time 🌷");
+}
+
+function createHeart(){
+
+    const heart=document.createElement("div");
+
+    heart.className="heart";
+
+    const list=[
+        "❤️",
+        "💗",
+        "💕",
+        "💖",
+        "🌷",
+        "✨"
+    ];
+
+    heart.innerHTML=
+        list[Math.floor(Math.random()*list.length)];
+
+    heart.style.left=
+        Math.random()*100+"vw";
+
+    heart.style.fontSize=
+        (18+Math.random()*25)+"px";
+
+    heart.style.animationDuration=
+        (3+Math.random()*3)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(function(){
+        heart.remove();
+    },6000);
+}
+
+function createHearts(amount){
+
+    for(let i=0;i<amount;i++){
+
+        setTimeout(function(){
+            createHeart();
+        },i*100);
+
+    }
+}
+
+</script>
+
+</body>
+</html>
